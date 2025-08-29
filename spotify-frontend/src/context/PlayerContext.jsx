@@ -134,6 +134,25 @@ const PlayerContextProvider = (props) => {
 
     }, [])
 
+    const [ searchInput , setSearchInput ] = useState("")
+    var [ filteredData , setFilteredData ] = useState([])
+
+    const SearchSong = (e) => {
+        const value = e.target.value;
+        setSearchInput(value);
+
+        setFilteredData([]); 
+        if (value.trim() === "") {
+        } 
+        else {
+            setFilteredData(
+                songsData.filter((a) =>
+                    a.name.toLowerCase().includes(value.toLowerCase())
+                )
+            )
+        }
+    }
+
     const contextValue = {
         audioRef,
         url,
@@ -146,7 +165,8 @@ const PlayerContextProvider = (props) => {
         playWithId,
         previous,next,
         seekSong,
-        songsData,albumsData
+        songsData,albumsData,
+        SearchSong,filteredData
     }
 
     return(

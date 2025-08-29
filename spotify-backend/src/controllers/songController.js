@@ -56,24 +56,6 @@ const removeSong = async (req, res) => {
         res.json({ success: false, message: "Song removed Failed" })
     }
 
-}
+} 
 
-const searchBox = async (req, res) => {
-    const { name } = req.params; 
-
-    if (!name || name.trim() === "") {
-        return res.json([]); 
-    }
-
-    try {
-        const songs = await songModel.find({
-            name: { $regex: name, $options: 'i' } 
-        });
-        res.json(songs); 
-    } catch (error) {
-        console.error("Error occurred while searching:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-};
-
-export { addSong,listSong,removeSong,searchBox }
+export { addSong,listSong,removeSong }
